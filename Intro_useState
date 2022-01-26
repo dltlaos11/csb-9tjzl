@@ -1,0 +1,53 @@
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+
+import "./styles.css";
+
+const App = () => {
+  const [item, setItem] = useState(1);
+  const incItem = () => setItem(item + 1);
+  const decItem = () => setItem(item - 1);
+
+  return (
+    <div className="App">
+      <h1>Hello {item}</h1>
+      <button onClick={incItem}>증가</button>
+      <button onClick={decItem}>감소</button>
+    </div>
+  );
+};
+
+class AppUgly extends React.Component {
+  state = {
+    item: 1
+  };
+
+  render() {
+    const { item } = this.state;
+    return (
+      <div className="App">
+        <h1>Hello {item}</h1>
+        <button onClick={this.incItem}>증가</button>
+        <button onClick={this.decItem}>감소</button>
+      </div>
+    );
+  }
+  // class Component 경우 this, setState 등을 사용. .더 복잡
+  incItem = () => {
+    this.setState((state) => {
+      return {
+        item: state.item + 1
+      };
+    });
+  };
+  decItem = () => {
+    this.setState((state) => {
+      return {
+        item: state.item - 1
+      };
+    });
+  };
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
